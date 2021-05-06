@@ -1,0 +1,9 @@
+.outerContainer {
+  width: 100%;
+}
+
+.innerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 14px;
+}
