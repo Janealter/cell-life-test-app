@@ -40,7 +40,7 @@ input {
   font-size: var(--base-font-size);
 }
 
-h1 {
+h1, h2 {
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;

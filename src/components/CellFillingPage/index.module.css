@@ -1,8 +1,17 @@
 .container {
-  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
 }
 
 .heading {
   text-align: center;
   margin: 0 0 22px 0;
+}
+
+.list {
+  margin-bottom: 20px;
+}
+
+.button {
+  margin-top: auto;
 }

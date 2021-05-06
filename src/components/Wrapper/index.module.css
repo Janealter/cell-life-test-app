@@ -1,9 +1,11 @@
 .outerContainer {
   width: 100%;
+  height: 100%;
 }
 
 .innerContainer {
   max-width: 1200px;
+  height: 100%;
   margin: 0 auto;
   padding: 16px 14px;
 }
