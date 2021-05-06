@@ -31,8 +31,8 @@ const itemMap: Record<ListItemType, ListItemInfo> = {
 };
 
 const CellFillingList: React.FC<Props> = ({ className, items }) => (
-  <div className={style.outerContainer}>
-    <ul className={composeClassNames(style.innerContainer, className)}>
+  <div className={composeClassNames(style.outerContainer, className)}>
+    <ul className={style.innerContainer}>
       {items.map(({ id, type }) => {
         const { name, description, className } = itemMap[type];
 
