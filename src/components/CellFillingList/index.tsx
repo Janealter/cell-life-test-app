@@ -1,5 +1,9 @@
-import { composeClassNames } from '../../helpers/class-names';
+import { TransitionGroup } from 'react-transition-group';
+
 import { ListItemInfo, ListItemType } from '../../typings/cell-list';
+import { composeClassNames } from '../../helpers/class-names';
+import useAppearanceAnimationHelper from '../../hooks/useAppearanceAnimationHelper';
+import CellFillingListItem, { APPEARANCE_ANIMATION_TIME_MS } from './CellFillingListItem';
 
 import style from './index.module.css';
 
@@ -30,22 +34,24 @@ const itemMap: Record<ListItemType, ListItemInfo> = {
   },
 };
 
-const CellFillingList: React.FC<Props> = ({ className, items }) => (
-  <div className={composeClassNames(style.outerContainer, className)}>
-    <ul className={style.innerContainer}>
-      {items.map(({ id, type }) => {
-        const { name, description, className } = itemMap[type];
+const ITEM_OFFSET_PX = 4;
 
-        return (
-          <li key={id} className={composeClassNames(style.item, className)}>
-            <h2 className={style.name}>{name}</h2>
-            <p className={style.description}>{description}</p>
-          </li>
-        );
-      })}
-    </ul>
-  </div>
-);
+const CellFillingList: React.FC<Props> = ({ className, items }) => {
+  const {
+    onContainerMounted, onItemMounted,
+  } = useAppearanceAnimationHelper(items, APPEARANCE_ANIMATION_TIME_MS, ITEM_OFFSET_PX);
+
+  return (
+    <div className={composeClassNames(style.outerContainer, className)}>
+      <ul ref={onContainerMounted} className={style.innerContainer}>
+        <TransitionGroup component={null}>
+          {items.map(({ id, type }) =>
+            <CellFillingListItem key={id} {...itemMap[type]} onItemMounted={onItemMounted} />)}
+        </TransitionGroup>
+      </ul>
+    </div>
+  );
+};
 
 export type { Item };
 export default CellFillingList;

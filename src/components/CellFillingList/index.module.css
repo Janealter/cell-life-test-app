@@ -1,6 +1,7 @@
 
 
 .outerContainer {
+  height: 100%;
   overflow-x: auto;
   display: flex;
   flex-direction: column-reverse;
@@ -12,8 +13,12 @@
 }
 
 .innerContainer {
+  flex: 1;
   padding: 0 2px;
   --icon-size: 40px;
+  --item-transform-height: 0;
+  --item-animation-time: 0;
+  --item-offset: 0;
 }
 
 .item {
@@ -23,7 +28,7 @@
   padding: 16px 16px 8px calc(16px + var(--icon-size) + 16px);
 }
 .item:not(:last-child) {
-  margin-bottom: 4px;
+  margin-bottom: var(--item-offset);
 }
 .item::before {
   content: '';
@@ -49,6 +54,23 @@
 .life::before {
   content: '🐣';
   background: linear-gradient(180deg, #AD00FF 0%, #FFB0E9 100%);
+}
+
+.itemEnterActive {
+  animation: appearance var(--item-animation-time) ease-in-out;
+}
+
+.itemExitActive {
+  animation: disappearance var(--item-animation-time) ease-in-out;
+}
+
+@keyframes appearance {
+  from { transform: translateY(var(--item-transform-height)); }
+  to { transform: none; }
+}
+@keyframes disappearance {
+  from { transform: none; }
+  to { transform: translateX(calc(110%)); }
 }
 
 .name {

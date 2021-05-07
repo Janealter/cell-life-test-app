@@ -1,8 +1,9 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { ListItemType } from '../../typings/cell-list';
 import Wrapper from '../Wrapper';
 import CellFillingList, { Item } from '../CellFillingList';
+import { APPEARANCE_ANIMATION_TIME_MS } from '../CellFillingList/CellFillingListItem';
 import Button from '../Button';
 
 import style from './index.module.css';
@@ -10,6 +11,7 @@ import style from './index.module.css';
 const CellFillingPage: React.FC = () => {
   const lastId = useRef<number>(0);
   const [items, setItems] = useState<Item[]>([]);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const createItem = (type: ListItemType) => ({
     id: ++lastId.current,
@@ -27,28 +29,34 @@ const CellFillingPage: React.FC = () => {
       ),
       // Add new item
       createItem(type),
-      // Create life by condition
-      ...(type === 'alive-cell' && defineLastElementIsAliveCell(items)
-        ? [createItem('life')]
-        : []
-      ),
     ];
 
     setItems(newItems);
   };
 
+  useEffect(() => {
+    if (defineTwoLastElementsAreAliveCells(items)) {
+      setIsButtonDisabled(true);
+      setTimeout(() => {
+        setItems([...items, createItem('life')]);
+        setIsButtonDisabled(false);
+      }, APPEARANCE_ANIMATION_TIME_MS);
+    }
+  }, [items]);
+
   return (
     <Wrapper className={style.container}>
       <h1 className={style.heading}>Клеточное наполнение</h1>
       <CellFillingList className={style.list} items={items} />
-      <Button className={style.button} onClick={onCreateClick}>СОТВОРИТЬ</Button>
+      <Button className={style.button} onClick={onCreateClick} disabled={isButtonDisabled}>СОТВОРИТЬ</Button>
     </Wrapper>
   );
 };
 
 const getRandomOfTwo = <A, B> (a: A, b: B) => Math.random() < 0.5 ? a : b;
 
-const defineLastElementIsAliveCell = (items: Item[]) => items[items.length - 1]?.type === 'alive-cell';
+const defineTwoLastElementsAreAliveCells = (items: Item[]) =>
+  items[items.length - 1]?.type === 'alive-cell' && items[items.length - 2]?.type === 'alive-cell';
 const defineTwoLastElementsAreDeadCells = (items: Item[]) =>
   items[items.length - 1]?.type === 'dead-cell' && items[items.length - 2]?.type === 'dead-cell';
 
