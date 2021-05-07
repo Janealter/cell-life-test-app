@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/cell-life-test-app/static/css/main.c60d660c.chunk.css",
-    "main.js": "/cell-life-test-app/static/js/main.970185e2.chunk.js",
-    "main.js.map": "/cell-life-test-app/static/js/main.970185e2.chunk.js.map",
+    "main.js": "/cell-life-test-app/static/js/main.80540281.chunk.js",
+    "main.js.map": "/cell-life-test-app/static/js/main.80540281.chunk.js.map",
     "runtime-main.js": "/cell-life-test-app/static/js/runtime-main.dea49a19.js",
     "runtime-main.js.map": "/cell-life-test-app/static/js/runtime-main.dea49a19.js.map",
     "static/js/2.47511a30.chunk.js": "/cell-life-test-app/static/js/2.47511a30.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.dea49a19.js",
     "static/js/2.47511a30.chunk.js",
     "static/css/main.c60d660c.chunk.css",
-    "static/js/main.970185e2.chunk.js"
+    "static/js/main.80540281.chunk.js"
   ]
 }
