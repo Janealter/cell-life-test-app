@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { ListItemType } from '../../typings/cell-list';
 import Wrapper from '../Wrapper';
@@ -13,6 +13,16 @@ const CellFillingPage: React.FC = () => {
   const [items, setItems] = useState<Item[]>([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
+  const runAfterAppearanceAnimationEnd = (action: CallableFunction) => {
+    setIsButtonDisabled(true);
+
+    const timeout = setTimeout(() => {
+      clearTimeout(timeout);
+      action();
+      setIsButtonDisabled(false);
+    }, APPEARANCE_ANIMATION_TIME_MS);
+  };
+
   const createItem = (type: ListItemType) => ({
     id: ++lastId.current,
     type,
@@ -21,28 +31,17 @@ const CellFillingPage: React.FC = () => {
   const onCreateClick = () => {
     const type = getRandomOfTwo('alive-cell', 'dead-cell');
 
-    const newItems = [
-      // Remove life by condition
-      ...(type === 'dead-cell' && defineTwoLastElementsAreDeadCells(items)
-        ? getItemsWithoutLastLife(items)
-        : items
-      ),
-      // Add new item
-      createItem(type),
-    ];
-
+    const newItems = [...items, createItem(type)];
     setItems(newItems);
-  };
 
-  useEffect(() => {
-    if (defineTwoLastElementsAreAliveCells(items)) {
-      setIsButtonDisabled(true);
-      setTimeout(() => {
-        setItems([...items, createItem('life')]);
-        setIsButtonDisabled(false);
-      }, APPEARANCE_ANIMATION_TIME_MS);
+    if (type === 'dead-cell' && defineTwoLastElementsAreDeadCells(items)) {
+      runAfterAppearanceAnimationEnd(() => setItems(getItemsWithoutLastLife(newItems)));
     }
-  }, [items]);
+
+    if (type === 'alive-cell' && defineLastElementIsAliveCell(items)) {
+      runAfterAppearanceAnimationEnd(() => setItems([...newItems, createItem('life')]));
+    }
+  };
 
   return (
     <Wrapper className={style.container}>
@@ -55,8 +54,7 @@ const CellFillingPage: React.FC = () => {
 
 const getRandomOfTwo = <A, B> (a: A, b: B) => Math.random() < 0.5 ? a : b;
 
-const defineTwoLastElementsAreAliveCells = (items: Item[]) =>
-  items[items.length - 1]?.type === 'alive-cell' && items[items.length - 2]?.type === 'alive-cell';
+const defineLastElementIsAliveCell = (items: Item[]) => items[items.length - 1]?.type === 'alive-cell';
 const defineTwoLastElementsAreDeadCells = (items: Item[]) =>
   items[items.length - 1]?.type === 'dead-cell' && items[items.length - 2]?.type === 'dead-cell';
 
