@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { TransitionGroup } from 'react-transition-group';
 
 import { ListItemInfo, ListItemType } from '../../typings/cell-list';
@@ -38,18 +39,23 @@ const ITEM_OFFSET_PX = 4;
 
 const CellFillingList: React.FC<Props> = ({ className, items }) => {
   const {
-    onContainerMounted, onItemMounted,
+    onContainerMounted, onItemMounted, containerRef,
   } = useAppearanceAnimationHelper(items, APPEARANCE_ANIMATION_TIME_MS, ITEM_OFFSET_PX);
 
+  useEffect(() => {
+    if (containerRef.current) {
+      // Scroll down if items changed
+      containerRef.current.scrollTop = containerRef.current.scrollHeight;
+    }
+  }, [items, containerRef]);
+
   return (
-    <div className={composeClassNames(style.outerContainer, className)}>
-      <ul ref={onContainerMounted} className={style.innerContainer}>
-        <TransitionGroup component={null}>
-          {items.map(({ id, type }) =>
-            <CellFillingListItem key={id} {...itemMap[type]} onItemMounted={onItemMounted} />)}
-        </TransitionGroup>
-      </ul>
-    </div>
+    <ul id="list" ref={onContainerMounted} className={composeClassNames(style.container, className)}>
+      <TransitionGroup component={null}>
+        {items.map(({ id, type }) =>
+          <CellFillingListItem key={id} {...itemMap[type]} onItemMounted={onItemMounted} />)}
+      </TransitionGroup>
+    </ul>
   );
 };
 

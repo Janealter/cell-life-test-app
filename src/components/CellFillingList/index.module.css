@@ -1,24 +1,16 @@
-
-
-.outerContainer {
+.container {
   height: 100%;
   overflow-x: auto;
-  display: flex;
-  flex-direction: column-reverse;
+  padding: 0 2px;
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-.outerContainer::-webkit-scrollbar {
-  display: none;
-}
-
-.innerContainer {
-  flex: 1;
-  padding: 0 2px;
   --icon-size: 40px;
   --item-transform-height: 0;
   --item-animation-time: 0;
   --item-offset: 0;
+}
+.container::-webkit-scrollbar {
+  display: none;
 }
 
 .item {

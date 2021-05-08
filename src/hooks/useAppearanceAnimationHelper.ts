@@ -42,7 +42,7 @@ const useAppearanceAnimationHelper = (items: unknown[], animationTimeMS: number,
     prevItemsLength.current = items.length;
   }, [items, offsetPX]);
 
-  return { onContainerMounted, onItemMounted };
+  return { onContainerMounted, onItemMounted, containerRef };
 };
 
 export default useAppearanceAnimationHelper;
