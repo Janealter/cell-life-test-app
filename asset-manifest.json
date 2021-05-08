@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/cell-life-test-app/static/css/main.c60d660c.chunk.css",
-    "main.js": "/cell-life-test-app/static/js/main.80540281.chunk.js",
-    "main.js.map": "/cell-life-test-app/static/js/main.80540281.chunk.js.map",
+    "main.css": "/cell-life-test-app/static/css/main.9ab92a13.chunk.css",
+    "main.js": "/cell-life-test-app/static/js/main.c0970b91.chunk.js",
+    "main.js.map": "/cell-life-test-app/static/js/main.c0970b91.chunk.js.map",
     "runtime-main.js": "/cell-life-test-app/static/js/runtime-main.dea49a19.js",
     "runtime-main.js.map": "/cell-life-test-app/static/js/runtime-main.dea49a19.js.map",
     "static/js/2.47511a30.chunk.js": "/cell-life-test-app/static/js/2.47511a30.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.cd396f5a.chunk.js": "/cell-life-test-app/static/js/3.cd396f5a.chunk.js",
     "static/js/3.cd396f5a.chunk.js.map": "/cell-life-test-app/static/js/3.cd396f5a.chunk.js.map",
     "index.html": "/cell-life-test-app/index.html",
-    "static/css/main.c60d660c.chunk.css.map": "/cell-life-test-app/static/css/main.c60d660c.chunk.css.map",
+    "static/css/main.9ab92a13.chunk.css.map": "/cell-life-test-app/static/css/main.9ab92a13.chunk.css.map",
     "static/js/2.47511a30.chunk.js.LICENSE.txt": "/cell-life-test-app/static/js/2.47511a30.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.dea49a19.js",
     "static/js/2.47511a30.chunk.js",
-    "static/css/main.c60d660c.chunk.css",
-    "static/js/main.80540281.chunk.js"
+    "static/css/main.9ab92a13.chunk.css",
+    "static/js/main.c0970b91.chunk.js"
   ]
 }
