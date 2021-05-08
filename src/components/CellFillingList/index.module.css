@@ -18,6 +18,7 @@
   background-color: white;
   border-radius: 8px;
   padding: 16px 16px 8px calc(16px + var(--icon-size) + 16px);
+  will-change: transform;
 }
 .item:not(:last-child) {
   margin-bottom: var(--item-offset);
@@ -58,11 +59,11 @@
 
 @keyframes appearance {
   from { transform: translateY(var(--item-transform-height)); }
-  to { transform: none; }
+  to { transform: translateY(0); }
 }
 @keyframes disappearance {
-  from { transform: none; }
-  to { transform: translateX(calc(110%)); }
+  from { transform: translateX(0); }
+  to { transform: translateX(110%); }
 }
 
 .name {
